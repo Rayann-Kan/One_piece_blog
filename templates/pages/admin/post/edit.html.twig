@@ -2,6 +2,11 @@
 
 {% block title %} Modifier l'article : {{post.title}}  {% endblock %}
 {% block description %} Modifier l'article {% endblock %}
+
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
 {% block tinyMCE %}
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
@@ -50,6 +55,8 @@
                         </div>
                         <div class="col-md-4">
                             {# Aperçu de la nouvelle image à uploader #}
+                            <div class="preview-image-title"></div>
+                            <div class="preview-image-content"></div>
 
                         </div>
                     </div>
@@ -68,4 +75,31 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $("#post_form_imageFile_file").on('change', function(){
+                let file = $(this).get(0).files[0];
+
+                if (file) 
+                {
+                   let fileReader = new FileReader();
+
+                   fileReader.onload = function() {
+                        
+                       let p =`<p class="text-center">Nouvelle image   </p>`;
+                       let img = `<img src="${fileReader.result}" class="img-fluid" alt="Prévisualisation de l'image de l'article"/>`;
+
+                       $(".preview-image-title").html(p);
+                       $(".preview-image-content").html(img);
+
+                    };
+                    fileReader.readAsDataURL(file);
+
+                }
+            });
+        })
+    </script>
 {% endblock %}
