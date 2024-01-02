@@ -43,7 +43,7 @@
     {% block dataTables %}{% endblock %}
 
     {# The text editor #}
-    {% block tinyMCE %}{% endblock %}
+    {% block tinyMCE %}    {% endblock %}
 
     {# Beautiful replacement for select boxes #}
     {% block select2 %}{% endblock %}
@@ -132,7 +132,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-danger d-flex align-items-center gap-2" href="#">
+                                <a class="nav-link link-danger d-flex align-items-center gap-2" href="{{path('admin.post.index')}}">
                                     <i class="fa-solid fa-feather-pointed"></i>
                                     Articles
                                 </a>
