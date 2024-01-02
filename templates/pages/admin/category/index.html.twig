@@ -26,13 +26,9 @@
 
     <h1 class="text-center my-3 display-5">Liste des catégories</h1>
 
-    {% for message in app.flashes('success') %}
-        <div class="text-center alert alert-success" role="alert">
-            {{message}}
-        </div>
-        
-    {% endfor %}
-
+    {% include "components/alert.html.twig" with {'type':'success'} %}
+    {% include "components/alert.html.twig" with {'type':'warning'} %}
+    
     <div class="d-flex justify-content-end align-items-center my-3">
         <a href="{{path('admin.category.create')}}" class="btn btn-danger shadow "><i class="fa-solid fa-plus"></i> Nouvelle Catégories</a>
     </div>
@@ -59,12 +55,13 @@
                         <td>{{category.updatedAt|date("d/m/Y")}}</td>
                         <td>
                             <a  class="text-secondary" href="{{path('admin.category.edit', {'id': category.id})}}" title="Modifier {{category.name}}"><i class="fas fa-edit "></i></a>
-                                <a onclick="event.preventDefault(); confirm('Ëtes vous sur de vouloir supprimer la catégorie « {{category.name}} »  ?') && document.querySelector('#delete_category_{{category.id}}_form').submit();" title="Supprimer {{category.name}}" href="" class="mx-2 text-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                <a onclick="event.preventDefault(); confirm(' Attention !! \n En supprimant la catégorie « {{category.name}} » tout les articles associés seront détruit \n Confirmer ? ') && document.querySelector('#delete_category_{{category.id}}_form').submit();" title="Supprimer {{category.name}}" href="" class="mx-2 text-danger"><i class="fa-solid fa-trash-can"></i></a>
                             <form method="POST" action="{{path('admin.category.delete', {'id':category.id})}}" id="delete_category_{{category.id}}_form">
                                     <input type="hidden" name="csrf_token" value="{{csrf_token('delete_category'~category.id)}}">
                                 <input type="hidden" name="_method" value="DELETE">
- 
                             </form>
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
