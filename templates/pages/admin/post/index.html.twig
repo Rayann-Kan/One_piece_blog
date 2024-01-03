@@ -39,6 +39,7 @@
                     <th>Image</th>
                     <th>Titre</th>
                     <th>Catégorie</th>
+                    <th>Tags</th>
                     <th>Status</th>
                     <th>Contenu</th>
                     <th>Crée le</th>
@@ -59,6 +60,11 @@
                         </td>
                         <td>{{post.title}}</td>
                         <td>{{post.category.name}}</td>
+                        <td>
+                            {% for tag in post.tags %}
+                                <span class="badge text-bg-secondary mx-1">{{tag.name}}</span>
+                            {% endfor %}
+                        </td>
                         <td class="text-center">
                             {% if post.isPublished %}
                                 <p>Publié le {{post.publishedAt|format_date()}}</p>
