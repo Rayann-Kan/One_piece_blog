@@ -1,3 +1,5 @@
+{% set pathInfo = app.request.pathInfo %}
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -49,7 +51,7 @@
     <body class="body-visitor">
         
         {# Navbar #}
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{path('visitor.welcome.index')}}">One Blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,16 +60,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{path('visitor.welcome.index')}}">Accueil</a>
+                        <a 
+                        class="nav-link {{pathInfo == path('visitor.welcome.index') ? 'ob-active' : '' }}" 
+                        {{pathInfo == path('visitor.welcome.index') ? 'aria-current="page"' : '' }}
+                        href="{{path('visitor.welcome.index')}}">
+                        Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Qui sommes-nous ?</a>
+                        <a class="nav-link" href="{{path('visitor.welcome.index')}}#about.me">Qui sommes-nous ?</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{path('visitor.blog.index')}}">Blog</a>
+                        <a 
+                        class="nav-link {{pathInfo == path('visitor.blog.index') ? 'ob-active' : '' }}" 
+                        {{pathInfo == path('visitor.blog.index') ? 'aria-current="page"' : '' }}
+                        href="{{path('visitor.blog.index')}}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{path('visitor.contact.create')}}">Contact</a>
+                        <a 
+                        class="nav-link {{pathInfo == path('visitor.contact.create') ? 'ob-active' : '' }}" 
+                        {{pathInfo == path('visitor.contact.create') ? 'aria-current="page"' : '' }}
+                        href="{{path('visitor.contact.create')}}">Contact</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -90,10 +102,10 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('visitor.authentication.login')}}">Connexion</a>
+                            <a class=" my-2 mx-sm-2 btn btn-outline-danger shadow" href="{{path('visitor.authentication.login')}}">Connexion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('visitor.registration.register')}}">Inscription</a>
+                            <a class="my-2 mx-sm-2 btn btn-danger shadow" href="{{path('visitor.registration.register')}}">Inscription</a>
                         </li>
                         
                     {% endif %}

@@ -8,7 +8,88 @@
 
 {% block main %}
     <main>
-        <h1>Page d'accueil</h1>
-    </main>
+        <header>
+            <div class="container mt-5"> 
+                <div class="row text-center">
+                    <div class="col-md-5 my-3 order-md-2">
+                    <img src="{{asset('images/visitor/welcome/strawhat_pirate.jpg')}}" class="img-fluid" alt="Image d'accueil">
+                    </div>
+                    <div class="col-md-7 my-3 order-md-1 d-flex flex-column justify-content-evenly align-items-center">
+                        <div>
+                            <h1>Bienvenue sur notre blog<h1>
+                        </div>
+                        <div>
+                            <p>L'équipe One Pièce One Blog est ravie de vous voir ici</p>
+                            <p>Nous sommes ici pour vous faires découvrir ou redécouvrir les meilleurs moments de l'oeuvre</p>
+                        </div>
+                        <div class="">
+                            <a href="" class="btn btn-danger btn-lg shadow ">Lire les articles </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        {# Section a propos de nous #}
+        <section class="bg-light py-3" id="about.me">
+                <h2 class="text-center my-3 display-5">Qui sommes-nous</h2>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <img class="img-fluid border border-danger border-3" alt="Image qui sommes-nous." src="{{asset('images/visitor/welcome/luffy_gear_5.jpg')}}">
+
+                        </div>
+                        <div class="col-md-6 d-flex flex-column  justify-content-center align-items-center">
+
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
+                            <p>
+                                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
+                        
+                        </div>
+                    </div>
+                </div>
+            
+        </section>
+
+        {# 3 dernier postes #}
+        {% if posts|length != 0 %}
+         <section id="last-posts" class="my-3 py-3">
+                <h2 data-aos="fade-down" class="text-center my-3 display-5">Mes 3 derniers articles</h2>
+
+                <div class="container mt-5">
+                    <div class="card-group">
+                        {% for post in posts %}
+                            <div class="card mx-3 border shadow">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{post.title}}</h3>
+                                    <p class="card-text">{{post.content|striptags|u.truncate(70, '...')|raw}}</p>
+                                    <p><a href="#" class="btn btn-sm btn-danger">Lire cet article</a></p>
+                                    <p class="card-text"><small class="text-body-secondary">Publié {{post.publishedAt|ago}}</small></p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+   
+        {% endif %}
+
+         <section class="my-3 py-5 bg-light text-center">
+            <a 
+                href="{{path('visitor.contact.create')}}" 
+                class="btn btn-lg btn-danger"
+            >
+                    Contactez-moi
+            </a>
+        </section>
+        
+    </main>   
 {% endblock %}
 
