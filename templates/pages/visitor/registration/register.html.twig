@@ -91,7 +91,7 @@
                             <label for="registration_form_agreeTerms">
                                 <div class="text-danger">{{ form_errors(registrationForm.agreeTerms) }}</div>
                                 {{ form_widget(registrationForm.agreeTerms) }}
-                                Veuillez accepter <a data-bs-toggle="modal" data-bs-target="#registerModal" href="#">les conditions générales d'utilisation</a>
+                                Veuillez accepter <a class="link-danger" data-bs-toggle="modal" data-bs-target="#registerModal" href="#">les conditions générales d'utilisation</a>
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -121,8 +121,8 @@
                         </div>
                     {{ form_end(registrationForm) }}
 
-                    <p class="my-1">Vous avez déjà un compte ? <a href="#">Connectez-vous</a></p>
-                    <p class="my-1"><a href="{{path('visitor.welcome.index')}}">Retour à l'accueil</a></p>
+                    <p class="my-1">Vous avez déjà un compte ? <a class="link-danger" href="{{path('visitor.authentication.login')}}">Connectez-vous</a></p>
+                    <p class="my-1"><a class="link-danger" href="{{path('visitor.welcome.index')}}">Retour à l'accueil</a></p>
                 </div>
             </div>
         </div>
