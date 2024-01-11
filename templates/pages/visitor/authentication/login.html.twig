@@ -77,7 +77,7 @@
                                 </label>
                             </div>
                             <div class="col-md-6 text-start text-md-end my-1">
-                                <a href="{{path('visitor.authentication.forgot_password_request')}}">Mot de passe oublié ?</a>
+                                <a class="link-danger" href="{{path('visitor.authentication.forgot_password_request')}}">Mot de passe oublié ?</a>
                             </div>
                         </div>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
@@ -86,8 +86,8 @@
                         </div>
                     </form>
 
-                    <p class="my-1">Vous n'êtes pas encore inscrit ? <a href="{{path('visitor.registration.register')}}">Inscrivez-vous</a></p>
-                    <p class="my-1"><a href="{{path('visitor.welcome.index')}}">Retour à l'accueil</a></p>
+                    <p class="my-1">Vous n'êtes pas encore inscrit ? <a  class="link-danger" href="{{path('visitor.registration.register')}}">Inscrivez-vous</a></p>
+                    <p class="my-1"><a class="link-danger" href="{{path('visitor.welcome.index')}}">Retour à l'accueil</a></p>
                 </div>
             </div>
 
