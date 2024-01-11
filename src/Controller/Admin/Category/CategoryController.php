@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
        {
             $em->persist($category);
             $em->flush();
-            $this->addFlash('sucess', 'la catégorie a été bien enregistrée');
+            $this->addFlash('success', 'la catégorie a été bien enregistrée');
 
            return  $this->redirectToRoute('admin.category.index');
        }

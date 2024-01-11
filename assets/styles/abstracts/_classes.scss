@@ -1,0 +1,15 @@
+.op-container
+{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+    @media screen and (min-width: 500px)
+    {
+     .op-container 
+     {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
