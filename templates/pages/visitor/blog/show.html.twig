@@ -7,5 +7,68 @@
 {% block keywords %}Blog, One Blog , One piece, Manga, Pirate{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Bonsoir</h1>
+
+<main>
+    <div class="op-container my-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{path('visitor.blog.index')}}">Liste des articles</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{post.title|u.truncate('50', '...')}}</li>
+                </ol>
+            </nav>
+    
+    <div class="text-center">
+            {% if post.image %}
+                <img class="img-fluid" src="{{ vich_uploader_asset(post, 'imageFile') }}" alt="{{ post.title }}">
+            {% endif %}
+    </div>
+
+     <div class="text-center">
+        <h1 class="my-3 display-5">{{post.title}}</h1>
+            <small>Publié {{post.publishedAt|ago}} par L'équipe One Blog </small>
+    </div>
+    <article class="my-3">
+                {{post.content|raw}}
+
+                
+    </article>
+            {% if app.user %}
+                <div class="my-5 container">
+                    {{form_start(form, {'action': path('visitor.blog.post.show', {'id': post.id, 'slug':post.slug})~"#comment_form_content" })}}
+                        <div class="mb-3">
+                            <label for="comment_form_content">Laissez un commentaire</label>
+                            <div class="text-danger">{{form_errors(form.content)}}</div>
+                            {{form_widget(form.content, {'attr': {'class': 'form-control'}})}}
+                        </div>
+                        <div>
+                            <input formnovalidate type="submit" class="btn btn-danger" value="Commenter">
+                        </div>
+                    {{form_end(form)}}
+                </div>
+            {% else %}
+                <p class="text-center">
+                    Pour laisser un commentaire, 
+                    veuillez vous 
+                    <a href="{{path('visitor.authentication.login')}}" class="btn btn-sm btn-outline-primary">connecter vous</a> 
+                     /  
+                    <a href="{{path('visitor.registration.register')}}" class="btn btn-sm btn-primary">Inscrire</a>
+                </p>
+            {% endif %}
+
+            <div class="container">
+                {% for comment in post.comments|reverse %}
+                    {% if comment.isActivated %}
+                        <div class="bg-white shadow p-3 my-3">
+                            <p class="fw-bold">{{comment.user.firstName}} {{comment.user.lastName}}</p>
+                            <p class="text-center">{{comment.content}}</p>
+                            <div class="text-end">
+                                <p class="fst-italic">{{comment.createdAt|ago}}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+</div>
+
+</main>
 {% endblock %}

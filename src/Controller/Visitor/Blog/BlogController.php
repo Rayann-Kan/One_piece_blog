@@ -4,10 +4,13 @@ namespace App\Controller\Visitor\Blog;
 
 use App\Entity\Tag;
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Entity\Category;
+use App\Form\CommentFormType;
 use App\Repository\TagRepository;
 use App\Repository\PostRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,11 +78,31 @@ class BlogController extends AbstractController
     #[Route('/blog/post/{id}/{slug}/show', name: 'visitor.blog.post.show', methods:['GET', 'POST'])]
     public function show(Post $post, 
     Request $request, 
-    EntityManagerInterface $em ): Response
+    EntityManagerInterface $em,
+    CommentRepository $commentRepository ): Response
     {
+        $comment = new Comment();
+        $form= $this->createForm(CommentFormType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $comment->setPost($post);
+            $comment->setUser($this->getUser());
+
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('success', 'Votre commentaire a bien été ajouté.');
+            return $this->redirectToRoute('visitor.blog.post.show',[
+                "id" => $post->getId(),
+                "slug" => $post->getSlug(),
+            ]);
+
+        }
 
         return $this->render('pages/visitor/blog/show.html.twig', [
             "post" => $post,
+            "form"=>$form->createView(),
         ]);
     }
 
