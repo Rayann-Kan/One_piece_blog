@@ -31,7 +31,7 @@ class Comment
         maxMessage: "Le commentaire doit contenir au maximum {{ limit }} caractères.",
     )]
     #[Assert\Regex(
-        pattern: '/^[0-9a-zA-Z-_,;!:.*%$ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\n\t\r]+$/i',
+        pattern: "/^[0-9a-zA-Z-'_,;!:.*%$ áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\n\t\r]+$/i",
         match: true,
         message: "Le commentaire doit contenir uniquement des lettres, des chiffres le tiret du milieu de l'undescore.",
     )]
