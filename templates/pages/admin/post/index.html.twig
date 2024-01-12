@@ -83,7 +83,7 @@
                             </form>
                         </td>
                         <td>
-                            <a title="Lire {{post.title}}"  href="{{path('admin.post.show', {'id':post.id})}}"><i class="fa-solid fa-eye "></i></a>
+                            <a class="btn btn-sm btn-danger" title="Lire {{post.title}}"  href="{{path('admin.post.show', {'id':post.id})}}"><i class="fa-solid fa-eye "></i></a>
                         </td>
                         <td>{{post.createdAt|format_date()}}</td>    
                         <td>{{post.updatedAt|format_date()}}</td>
